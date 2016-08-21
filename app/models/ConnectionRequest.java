@@ -1,6 +1,8 @@
 package models;
 
+import com.avaje.ebean.Model;
 import com.avaje.ebean.annotation.EnumValue;
+import com.mysql.jdbc.Connection;
 
 import javax.persistence.*;
 
@@ -8,7 +10,7 @@ import javax.persistence.*;
  * Created by lubuntu on 8/20/16.
  */
 @Entity
-public class ConnectionRequest {
+public class ConnectionRequest extends Model{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long id;
@@ -24,4 +26,5 @@ public class ConnectionRequest {
         @EnumValue(value = "ACCEPTED")
         ACCEPTED
     }
+    public static Model.Finder<Long, ConnectionRequest> find = new Model.Finder<Long, ConnectionRequest>(ConnectionRequest.class);
 }
