@@ -30,4 +30,20 @@ public class Connections extends Controller {
         }
         return ok();
     }
+    public Result acceptConnectionRequest(Long requestId){
+
+        ConnectionRequest connectionRequest = ConnectionRequest.find.byId(requestId);
+        connectionRequest.status = ConnectionRequest.Status.ACCEPTED;
+        ConnectionRequest.db().update(connectionRequest);
+
+        User sender = User.find.byId(connectionRequest.sender.id);
+        sender.connections.add(connectionRequest.receiver);
+        User.db().update(sender);
+
+        User receiver = User.find.byId(connectionRequest.receiver.id);
+        receiver.connections.add(connectionRequest.sender);
+        User.db().update(receiver);
+
+        return ok();
+    }
 }
