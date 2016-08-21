@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,5 +22,8 @@ public class Profile extends Model{
     public Profile(String firstName,String lastName){
         this.firstName=firstName;
         this.lastName=lastName;
+
+
     }
+    public static Finder<Long, Profile> find = new Finder<Long, Profile>(Profile.class);
 }
